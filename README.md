@@ -10,7 +10,7 @@ Once GitHub Pages is enabled, the docs will be available at:
 
 ## Files
 
-- [`swagger.pim.yaml`](swagger.pim.yaml) — PIM service OpenAPI specification
+- [`swagger.shopee-live.yaml`](swagger.shopee-live.yaml) — Shopee Live OpenAPI specification
 - [`index.html`](index.html) — Redoc renderer (entry point for GitHub Pages)
 
 ## Enable GitHub Pages
@@ -18,7 +18,7 @@ Once GitHub Pages is enabled, the docs will be available at:
 1. Push this repo to GitHub.
 2. Go to **Settings → Pages**.
 3. Under **Source**, choose the branch (e.g. `main`) and the `/ (root)` folder.
-4. Save. GitHub Pages will publish `index.html` and serve `swagger.pim.yaml` alongside it.
+4. Save. GitHub Pages will publish `index.html` and serve `swagger.shopee-live.yaml` alongside it.
 
 ## Local preview
 
@@ -34,7 +34,7 @@ Then open <http://localhost:8080>.
 
 ## Switching which spec is rendered
 
-[`index.html`](index.html) loads `swagger.pim.yaml`. To render a different spec, change the `spec-url` attribute:
+[`index.html`](index.html) loads `swagger.shopee-live.yaml`. To render a different spec, change the `spec-url` attribute:
 
 ```html
 <redoc spec-url="your-spec.yaml"></redoc>

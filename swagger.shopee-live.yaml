@@ -1,0 +1,707 @@
+openapi: 3.0.0
+paths:
+  /shopee/live/api/session/detail/{shopName}/{session_id}:
+    get:
+      operationId: LiveSessionController_getSessionDetail
+      summary: Get live session detail
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/create:
+    post:
+      operationId: LiveSessionController_createSession
+      summary: Create a new live session
+      parameters:
+        - name: user_id
+          required: true
+          in: query
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                cover_image_url:
+                  type: string
+                description:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                    - test
+                    - normal
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/item-list/{shopName}/{session_id}:
+    get:
+      operationId: LiveSessionController_getItemList
+      summary: List items in a live session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/update-show-item/{shopName}:
+    post:
+      operationId: LiveSessionController_updateShowItem
+      summary: Update the currently shown item in a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+                - item_id
+              properties:
+                session_id:
+                  type: number
+                item_id:
+                  type: number
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/delete-show-item/{shopName}/{session_id}:
+    post:
+      operationId: LiveSessionController_deleteShowItem
+      summary: Delete the currently shown item in a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/show-item/{shopName}/{session_id}:
+    get:
+      operationId: LiveSessionController_getShowItem
+      summary: Get the currently shown item in a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/like-item-list/{shopName}/{session_id}:
+    get:
+      operationId: LiveSessionController_getLikeItemList
+      summary: List liked items for a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/recent-item-list/{shopName}:
+    get:
+      operationId: LiveSessionController_getRecentItemList
+      summary: List recent items for a shop
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/item-metric/{shopName}/{session_id}:
+    get:
+      operationId: LiveSessionController_getSessionItemMetric
+      summary: Get item metrics for a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/upload-image/{shopName}:
+    post:
+      operationId: LiveSessionController_uploadImage
+      summary: Upload cover/highlight image for a Live session
+      description: >-
+        Server reads the file at the supplied local path and forwards it to Shopee as multipart. Returns image_url for
+        use in create/update session.
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  description: Absolute path to the image on the server filesystem
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/create/{shopName}:
+    post:
+      operationId: LiveSessionController_createSessionByShop
+      summary: Create a new live session (by shopName)
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                cover_image_id:
+                  type: string
+                cover_image_url:
+                  type: string
+                is_test:
+                  type: boolean
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/update/{shopName}/{session_id}:
+    post:
+      operationId: LiveSessionController_updateSession
+      summary: Update title/description/cover for an unstarted session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                cover_image_url:
+                  type: string
+                cover_image_id:
+                  type: string
+                is_test:
+                  type: boolean
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/start/{shopName}/{session_id}:
+    post:
+      operationId: LiveSessionController_startSession
+      summary: Start broadcasting a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - domain_id
+              properties:
+                domain_id:
+                  type: number
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/end/{shopName}/{session_id}:
+    post:
+      operationId: LiveSessionController_endSession
+      summary: End a live session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/item-count/{shopName}/{session_id}:
+    get:
+      operationId: LiveSessionController_getItemCount
+      summary: Get item count for a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/add-item-list/{shopName}:
+    post:
+      operationId: LiveSessionController_addItemList
+      summary: Add a batch of items to a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+                - item_list
+              properties:
+                session_id:
+                  type: number
+                item_list:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - item_id
+                    properties:
+                      item_id:
+                        type: number
+                      shop_id:
+                        type: number
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/delete-item-list/{shopName}:
+    post:
+      operationId: LiveSessionController_deleteItemList
+      summary: Delete a batch of items from a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+                - item_list
+              properties:
+                session_id:
+                  type: number
+                item_list:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - item_id
+                    properties:
+                      item_id:
+                        type: number
+                      shop_id:
+                        type: number
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/update-item-list/{shopName}:
+    post:
+      operationId: LiveSessionController_updateItemList
+      summary: Update items list for a session (refresh/sync)
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+                - item_list
+              properties:
+                session_id:
+                  type: number
+                item_list:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - item_id
+                    properties:
+                      item_id:
+                        type: number
+                      shop_id:
+                        type: number
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/item-set-list/{shopName}:
+    get:
+      operationId: LiveSessionController_getItemSetList
+      summary: List Item Sets saved by this shop
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/item-set-item-list/{shopName}:
+    get:
+      operationId: LiveSessionController_getItemSetItemList
+      summary: List items inside one Item Set
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: item_set_id
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/apply-item-set/{shopName}:
+    post:
+      operationId: LiveSessionController_applyItemSet
+      summary: Apply one or more Item Sets to a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+                - item_set_ids
+              properties:
+                session_id:
+                  type: number
+                item_set_ids:
+                  type: array
+                  items:
+                    type: number
+      responses:
+        '201':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/latest-comment-list/{shopName}/{session_id}:
+    get:
+      operationId: LiveSessionController_getLatestCommentList
+      summary: List latest comments for a session
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: session_id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+info:
+  title: Nest Marketplace Backend - Shopee Live
+  description: API documentation (Shopee Live module)
+  version: 0.0.1
+  contact: {}
+tags: []
+servers:
+  - url: '{SHOPEE_LIVE_URL}'
+    description: shopee-live server
+    variables:
+      SHOPEE_LIVE_URL:
+        default: http://localhost:8444
+        description: shopee-live base URL
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas: {}
