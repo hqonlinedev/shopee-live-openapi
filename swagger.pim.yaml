@@ -1,0 +1,224 @@
+openapi: 3.0.0
+paths:
+  /pim/qc-list:
+    get:
+      operationId: PimController_getQcList
+      summary: Get QC list by date and channel
+      parameters:
+        - name: date
+          required: false
+          in: query
+          description: Date in YYYYMMDD format (defaults to today)
+          schema:
+            type: string
+        - name: channel
+          required: false
+          in: query
+          description: Channel number (1 or 2)
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+      tags:
+        - PIM
+      security:
+        - bearer: []
+  /pim/products:
+    get:
+      operationId: PimController_getProducts
+      summary: List products
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: Page number (default 1)
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+      tags:
+        - PIM
+      security:
+        - bearer: []
+  /pim/product-info:
+    post:
+      operationId: PimController_getProductInfo
+      summary: Get product info by article numbers
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetProductInfoBody'
+      responses:
+        '200':
+          description: List of product info
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductInfo'
+      tags:
+        - PIM
+      security:
+        - bearer: []
+info:
+  title: Nest Marketplace Backend - PIM
+  description: API documentation (PIM module)
+  version: 0.0.1
+  contact: {}
+tags: []
+servers:
+  - url: '{PIM_URL}'
+    description: pim server
+    variables:
+      PIM_URL:
+        default: http://localhost:8444
+        description: pim base URL
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    ProductListItem:
+      type: object
+      properties:
+        articleNo:
+          type: string
+          example: '370000771'
+      required:
+        - articleNo
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: number
+          example: 2
+        limit:
+          type: number
+          example: 100
+        totalPages:
+          type: number
+          example: 6598
+        total:
+          type: number
+          example: 659734
+      required:
+        - page
+        - limit
+        - totalPages
+        - total
+    ProductListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductListItem'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+        - data
+        - pagination
+    GetProductInfoBody:
+      type: object
+      properties:
+        articleNo:
+          description: List of article numbers
+          example:
+            - '1234567'
+            - '7654321'
+          type: array
+          items:
+            type: string
+        local:
+          type: number
+          description: Locale flag
+          default: 1
+          example: 1
+      required:
+        - articleNo
+    ProductInfo:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: '170089115'
+        flag_qc:
+          type: boolean
+          example: false
+        category_ids:
+          example: []
+          type: array
+          items:
+            type: string
+        mer_category_id:
+          type: string
+          example: '174604010'
+        package_width:
+          type: string
+          example: '4.900'
+        package_height:
+          type: string
+          example: '15.800'
+        package_length:
+          type: string
+          example: '55.500'
+        am_shipping_type:
+          type: string
+          example: THAIPOST
+        color:
+          type: string
+          example: Opaque
+        lgroup:
+          type: string
+          example: HDI
+        material:
+          type: string
+          example: ''
+        material_description:
+          type: string
+          example: แก้ว+พลาสติก
+        short_description:
+          type: string
+          example: TWIST หลอดประหยัดไฟ E14# 11 W DL
+        size:
+          type: string
+          example: 4X4X10.3 CM
+        size_masterdata:
+          type: string
+          example: 4X4X10.3 CM
+        status:
+          type: string
+          example: '2'
+        weight:
+          type: string
+          example: 0.066 KG
+      required:
+        - sku
+        - flag_qc
+        - category_ids
+        - mer_category_id
+        - package_width
+        - package_height
+        - package_length
+        - am_shipping_type
+        - color
+        - lgroup
+        - material
+        - material_description
+        - short_description
+        - size
+        - size_masterdata
+        - status
+        - weight
