@@ -6,7 +6,7 @@ API documentation rendered with [Redoc](https://github.com/Redocly/redoc) and ho
 
 Once GitHub Pages is enabled, the docs will be available at:
 
-<https://hqonlinedev.github.io/pim-openapi/>
+<https://hqonlinedev.github.io/shopee-live-openapi/>
 
 ## Files
 
