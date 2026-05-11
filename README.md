@@ -1,4 +1,4 @@
-# PIM API Docs
+# Shopee Live API Docs
 
 API documentation rendered with [Redoc](https://github.com/Redocly/redoc) and hosted on **GitHub Pages**.
 
