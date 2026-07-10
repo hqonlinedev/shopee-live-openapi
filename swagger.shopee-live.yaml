@@ -91,6 +91,87 @@ paths:
         - Shopee Live - Session
       security:
         - bearer: []
+  /shopee/live/api/session/product-item-list/{shopName}:
+    get:
+      operationId: LiveSessionController_getProductItemList
+      summary: List shop products (Shopee product get_item_list)
+      description: Shop-level product catalog via /api/v2/product/get_item_list (not session-scoped).
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: item_status
+          required: false
+          in: query
+          description: Comma-separated item statuses. Defaults to NORMAL.
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page_size
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/product-item-base-info/{shopName}:
+    get:
+      operationId: LiveSessionController_getProductItemBaseInfo
+      summary: Get base info for products (Shopee product get_item_base_info)
+      description: Shop-level product detail via /api/v2/product/get_item_base_info for a batch of item ids.
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: item_id_list
+          required: true
+          in: query
+          description: Comma-separated item ids (max 50).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
+  /shopee/live/api/session/product-model-list/{shopName}:
+    get:
+      operationId: LiveSessionController_getProductModelList
+      summary: Get model/variation list for a product (Shopee get_model_list)
+      description: Shop-level product variation listing via /api/v2/product/get_model_list for a single item id.
+      parameters:
+        - name: shopName
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: item_id
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Shopee Live - Session
+      security:
+        - bearer: []
   /shopee/live/api/session/update-show-item/{shopName}:
     post:
       operationId: LiveSessionController_updateShowItem
